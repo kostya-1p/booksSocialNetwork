@@ -41,4 +41,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function createdComments(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Comment::class, 'author_id');
+    }
+
+    public function commentsAtProfile(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Comment::class, 'profile_id');
+    }
 }
