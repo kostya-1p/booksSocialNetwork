@@ -14,7 +14,7 @@ class UploadCommentController extends Controller
         $comment->title = $request->title;
         $comment->message = $request->message;
         $comment->profileId = 1;
-        $comment->authorId = 1;
+        $comment->authorId = 2;
         $comment->save();
 
         return redirect(RouteServiceProvider::HOME);

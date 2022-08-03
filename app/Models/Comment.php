@@ -14,11 +14,17 @@ class Comment extends Model
         'message',
         'profileId',
         'authorId',
-        'answeredCommentId'
+        'answeredCommentId',
+        'created_at'
     ];
 
     public function answeredComment(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(Comment::class, 'answered_comment_id');
+        return $this->belongsTo(Comment::class, 'answeredCommentId');
+    }
+
+    public function commentAuthor()
+    {
+        return $this->belongsTo(User::class, 'authorId');
     }
 }

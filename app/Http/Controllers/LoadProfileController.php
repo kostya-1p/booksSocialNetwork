@@ -9,7 +9,21 @@ class LoadProfileController extends Controller
     public function showProfile(int $id)
     {
         $user = User::find($id);
+        $comments = $user->commentsAtProfile;
+        $authorNames = $this->getAuthorNames($comments);
 
-        return view('dashboard')->with('user', $user);
+        return view('dashboard')->with('user', $user)->with('comments', $comments)->
+               with('authorNames', $authorNames);
+    }
+
+    private function getAuthorNames($comments): array
+    {
+        $authors = [];
+        foreach ($comments as $comment)
+        {
+            $authors[] = $comment->commentAuthor->name;
+        }
+
+        return $authors;
     }
 }
