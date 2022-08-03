@@ -13,9 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::get('profile/{id?}', [\App\Http\Controllers\LoadProfileController::class, 'showProfile'])->
+       name('dashboard');
 
 Route::post('upload', [\App\Http\Controllers\UploadCommentController::class, 'upload'])->
         name('upload');
