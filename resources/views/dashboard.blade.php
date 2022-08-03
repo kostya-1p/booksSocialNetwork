@@ -46,6 +46,8 @@
         <form method="POST" action="{{ route('upload') }}">
             @csrf
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 p-6 bg-white border-b border-gray-200 m-10">
+                <input type="hidden" name="profile_id" value={{ $user->id }}>
+
                 <x-label for="title" value="Title"/>
 
                 <x-input id="title" class="block mt-1 mb-10 w-full" type="text" name="title" required

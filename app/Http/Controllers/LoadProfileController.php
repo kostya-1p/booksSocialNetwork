@@ -6,7 +6,7 @@ use App\Models\User;
 
 class LoadProfileController extends Controller
 {
-    public function showProfile(int $id)
+    public function showProfile(int $id = 1)
     {
         $user = User::find($id);
         $comments = $user->commentsAtProfile;

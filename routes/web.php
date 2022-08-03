@@ -13,8 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('profile/all', function (){
+    echo 'List of all users';
+});
+
 Route::get('profile/{id?}', [\App\Http\Controllers\LoadProfileController::class, 'showProfile'])->
-       name('dashboard');
+       name('dashboard')->whereNumber('id');
 
 Route::post('upload', [\App\Http\Controllers\UploadCommentController::class, 'upload'])->
         name('upload');
