@@ -12,9 +12,9 @@ class Comment extends Model
     protected $fillable = [
         'title',
         'message',
-        'profile_Id',
-        'author_Id',
-        'answered_Comment_Id'
+        'profileId',
+        'authorId',
+        'answeredCommentId'
     ];
 
     public function answeredComment(): \Illuminate\Database\Eloquent\Relations\BelongsTo
