@@ -9,12 +9,13 @@ class Comment extends Model
 {
     use HasFactory;
 
-    private string $title;
-    private string $message;
-
-    private int $profileId;
-    private int $authorId;
-    private int $answeredCommentId;
+    protected $fillable = [
+        'title',
+        'message',
+        'profile_Id',
+        'author_Id',
+        'answered_Comment_Id'
+    ];
 
     public function answeredComment(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {

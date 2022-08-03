@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+})->name('dashboard');
 
-require __DIR__.'/auth.php';
+Route::post('upload', [\App\Http\Controllers\UploadCommentController::class, 'upload'])->
+        name('upload');
+
+require __DIR__ . '/auth.php';
