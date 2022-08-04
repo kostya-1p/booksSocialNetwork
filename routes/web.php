@@ -13,9 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('profile/all', function () {
-    echo 'List of all users';
-});
+Route::get('profile/all', [\App\Http\Controllers\ShowUserProfilesController::class, 'show'])->
+name('allProfiles');
 
 Route::get('profile/{id?}', [\App\Http\Controllers\LoadProfileController::class, 'showProfile'])->
 name('dashboard')->whereNumber('id');
