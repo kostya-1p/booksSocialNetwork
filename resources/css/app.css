@@ -5,3 +5,11 @@
 .comment_date{
     text-align: right;
 }
+
+.close {
+    position: relative;
+    top: -10px;
+    background-color: transparent;
+    border: none;
+    float:right;
+}

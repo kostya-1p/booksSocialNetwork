@@ -23,6 +23,17 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white border-b border-gray-200">
+                        @auth
+                        @if(Auth::id() == $comment->profileId || Auth::id() == $comment->authorId)
+                            <form method="post" action="{{ route('delete') }}">
+                                @csrf
+                                <input type="hidden" name="id" value={{$comment->id}}>
+                                <input type="hidden" name="author_id" value={{$comment->authorId}}>
+                                <button class="close">X</button>
+                            </form>
+                        @endif
+                        @endauth
+
                         <h1><b> {{$authorNames[$index]}} </b></h1>
 
                         <p>
@@ -50,8 +61,7 @@
 
                 <x-label for="title" value="Title"/>
 
-                <x-input id="title" class="block mt-1 mb-10 w-full" type="text" name="title" required
-                         autofocus/>
+                <x-input id="title" class="block mt-1 mb-10 w-full" type="text" name="title" required/>
 
                 <x-label for="msg" value="Message"/>
 
