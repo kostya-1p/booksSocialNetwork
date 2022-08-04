@@ -13,8 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', function (){
+   return redirect('profile/all');
+});
+
 Route::get('profile/all', [\App\Http\Controllers\ShowUserProfilesController::class, 'show'])->
 name('allProfiles');
+
+Route::get('profile/{id}/comments', [\App\Http\Controllers\ShowUserCommentsController::class, 'showComments'])->
+name('allUserComments')->whereNumber('id');
 
 Route::get('profile/{id?}', [\App\Http\Controllers\LoadProfileController::class, 'showProfile'])->
 name('dashboard')->whereNumber('id');
