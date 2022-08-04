@@ -24,14 +24,14 @@
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white border-b border-gray-200">
                         @auth
-                        @if(Auth::id() == $comment->profileId || Auth::id() == $comment->authorId)
-                            <form method="post" action="{{ route('delete') }}">
-                                @csrf
-                                <input type="hidden" name="id" value={{$comment->id}}>
-                                <input type="hidden" name="author_id" value={{$comment->authorId}}>
-                                <button class="close">X</button>
-                            </form>
-                        @endif
+                            @if(Auth::id() == $comment->profileId || Auth::id() == $comment->authorId)
+                                <form method="post" action="{{ route('delete') }}">
+                                    @csrf
+                                    <input type="hidden" name="id" value={{$comment->id}}>
+                                    <input type="hidden" name="author_id" value={{$comment->authorId}}>
+                                    <button class="close">X</button>
+                                </form>
+                            @endif
                         @endauth
 
                         <h1><b> {{$authorNames[$index]}} </b></h1>
@@ -47,6 +47,10 @@
                         <p class="comment_date">
                             {{$comment->created_at->format('d.m.Y')}}
                         </p>
+
+                        @auth
+                            <button class="reply">Reply</button>
+                        @endauth
                     </div>
                 </div>
             </div>
