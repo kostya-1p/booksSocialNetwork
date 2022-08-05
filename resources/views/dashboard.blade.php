@@ -34,7 +34,9 @@
                             @endif
                         @endauth
 
-                        <h1><b> {{$authorNames[$index]}} </b></h1>
+                        <p hidden class="reply{{$index}}"> {{$comment->id}} </p>
+
+                        <h1 class="reply{{$index}}"><b> {{$authorNames[$index]}} </b></h1>
 
                         <p>
                             {{$comment->title}}
@@ -49,7 +51,7 @@
                         </p>
 
                         @auth
-                            <button class="reply">Reply</button>
+                            <button class="reply{{$index}}">Reply</button>
                         @endauth
                     </div>
                 </div>

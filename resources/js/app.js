@@ -6,9 +6,11 @@ window.Alpine = Alpine;
 
 Alpine.start();
 
-const btns = document.querySelectorAll('.reply');
-for (let i = 0; i < btns.length; i++) {
-    btns[i].addEventListener('click', function (e) {
-        alert(e.target.innerHTML);
-    });
-}
+
+$(document).ready(function () {
+    for (let i = 0; i < 10; i++) {
+        $("button.reply" + i).click(function () {
+            alert($("p.reply" + i).text());
+        });
+    }
+});

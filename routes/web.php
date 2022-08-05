@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function (){
-   return redirect('profile/all');
+Route::get('/', function () {
+    return redirect('profile/all');
 });
 
 Route::get('profile/all', [\App\Http\Controllers\ShowUserProfilesController::class, 'show'])->
@@ -31,5 +31,8 @@ name('upload');
 
 Route::post('delete', [\App\Http\Controllers\DeleteCommentController::class, 'delete'])->
 name('delete');
+
+Route::get('/load_comments/{id}', [\App\Http\Controllers\LoadProfileController::class, 'loadRestComments'])->
+whereNumber("id");
 
 require __DIR__ . '/auth.php';

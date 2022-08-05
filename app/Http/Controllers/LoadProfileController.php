@@ -13,7 +13,20 @@ class LoadProfileController extends Controller
         $authorNames = $this->getAuthorNames($comments);
 
         return view('dashboard')->with('user', $user)->with('comments', $comments)->
-               with('authorNames', $authorNames);
+        with('authorNames', $authorNames);
+    }
+
+    public function loadRestComments(int $id)
+    {
+        $user = User::find($id);
+        $comments = $user->commentsAtProfile()->get();
+
+        $skip = 5;
+        $comments = $comments->skip($skip);
+
+        $this->getAuthorNames($comments);
+
+        return $comments->toJson(JSON_PRETTY_PRINT);
     }
 
     private function getAuthorNames($comments): array
