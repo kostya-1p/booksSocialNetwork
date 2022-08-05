@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use function Symfony\Component\String\s;
 
 class LoadProfileController extends Controller
 {
@@ -24,9 +25,10 @@ class LoadProfileController extends Controller
         $skip = 5;
         $comments = $comments->skip($skip);
 
-        $this->getAuthorNames($comments);
+        $authorNames = $this->getAuthorNames($comments);
 
-        return $comments->toJson(JSON_PRETTY_PRINT);
+        $responseCommentArray = $this->getResponseArray($comments, $authorNames, $skip);
+        return json_encode($responseCommentArray);
     }
 
     private function getAuthorNames($comments): array
@@ -38,5 +40,27 @@ class LoadProfileController extends Controller
         }
 
         return $authors;
+    }
+
+    private function getResponseArray($comments, $authorNames, $authorNamesOffset): array
+    {
+        $responseArray = [];
+        foreach ($comments as $index => $comment)
+        {
+            $responseArray[] = $this->getItemOfResponseArray($comment, $authorNames[$index - $authorNamesOffset]);
+        }
+
+        return $responseArray;
+    }
+
+    private function getItemOfResponseArray($comment, $authorName): array
+    {
+        return ["id" => $comment->id,
+            "profileId" => $comment->profileId,
+            "authorId" => $comment->authorId,
+            "authorName" => $authorName,
+            "title" => $comment->title,
+            "message" => $comment->message,
+            "created_at" => $comment->created_at];
     }
 }

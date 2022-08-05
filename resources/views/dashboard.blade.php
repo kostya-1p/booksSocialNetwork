@@ -60,7 +60,7 @@
     @endforeach
 
 
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 p-6 border-b border-gray-200 m-10">
+    <div id="load_more_container" class="max-w-7xl mx-auto sm:px-6 lg:px-8 p-6 border-b border-gray-200 m-10">
         <x-button id="load_more_comments">
             Load More
         </x-button>
