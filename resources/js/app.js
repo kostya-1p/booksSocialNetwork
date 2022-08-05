@@ -7,7 +7,7 @@ window.Alpine = Alpine;
 Alpine.start();
 
 $(document).ready(function () {
-    $("button.reply").click(function () {
+    $('main').on('click', "button.reply", function () {
         const commentAuthorName = $(this).parent().children("h1").text();
         const commentId = $(this).parent().children("h2").text();
 
@@ -40,7 +40,7 @@ function getHtmlComment(comment) {
         "<div class=\"max-w-7xl mx-auto sm:px-6 lg:px-8\">" +
         "<div class=\"bg-white overflow-hidden shadow-sm sm:rounded-lg\">" +
         "<div class=\"p-6 bg-white border-b border-gray-200\">" +
-        "<p hidden" + comment['id'] + "</p>" +
+        "<h2 hidden>" + comment['id'] + "</h2>" +
         "<h1><b>" + comment['authorName'] + "</b></h1>" +
         "<p>" + comment['title'] + "</p>" +
         "<p>" + comment['message'] + "</p>" +
