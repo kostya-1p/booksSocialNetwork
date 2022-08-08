@@ -71,7 +71,8 @@ function getRepliedMessage(comments, comment) {
         if (answeredComment !== -1) {
             return comments[answeredComment]['message'];
         }
-        return 'Message deleted';
+    } else if (comment['isReply']) {
+        return "Message Deleted";
     }
 
     return '';
@@ -80,7 +81,7 @@ function getRepliedMessage(comments, comment) {
 function showComments(commentsJson) {
     const commentsArray = JSON.parse(commentsJson);
 
-    commentsArray.forEach(comment => {
+    commentsArray.slice(5, commentsArray.length).forEach(comment => {
         const repliedMessage = getRepliedMessage(commentsArray, comment);
         const htmlComment = getHtmlComment(comment, repliedMessage);
         $(htmlComment).insertBefore("#load_more_container");

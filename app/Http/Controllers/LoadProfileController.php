@@ -22,7 +22,7 @@ class LoadProfileController extends Controller
         $user = User::find($id);
         $comments = $user->commentsAtProfile()->get();
 
-        $skip = 5;
+        $skip = 0;
         $comments = $comments->skip($skip);
 
         $authorNames = $this->getAuthorNames($comments);
@@ -62,6 +62,7 @@ class LoadProfileController extends Controller
             "title" => $comment->title,
             "message" => $comment->message,
             "created_at" => $comment->created_at,
-            "answeredCommentId"=>$comment->answeredCommentId];
+            "answeredCommentId"=>$comment->answeredCommentId,
+            "isReply"=>$comment->isReply];
     }
 }
