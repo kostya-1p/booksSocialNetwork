@@ -61,6 +61,7 @@ class LoadProfileController extends Controller
             "authorName" => $authorName,
             "title" => $comment->title,
             "message" => $comment->message,
-            "created_at" => $comment->created_at];
+            "created_at" => $comment->created_at,
+            "answeredCommentId"=>$comment->answeredCommentId];
     }
 }

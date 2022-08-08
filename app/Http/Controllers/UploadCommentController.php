@@ -23,6 +23,11 @@ class UploadCommentController extends Controller
         $comment->profileId = $request->profile_id;
         $comment->authorId = Auth::id();
 
+        if (isset($request->answered_comment_id))
+        {
+            $comment->answeredCommentId = $request->answered_comment_id;
+        }
+
         $comment->save();
 
         return redirect(RouteServiceProvider::HOME . '/' . $request->profile_id);

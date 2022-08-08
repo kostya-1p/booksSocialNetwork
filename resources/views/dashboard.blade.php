@@ -42,6 +42,14 @@
 
                         <h1><b> {{$authorNames[$index]}} </b></h1>
 
+                        @if($comment->answeredCommentId != null)
+                            @if(($answeredComment = $comments->keyBy('id')->get($comment->answeredCommentId)) != null)
+                                    <p> {{$answeredComment->message}} </p>
+                            @else
+                                    <p> Сообщение удалено </p>
+                            @endif
+                        @endif
+
                         <p>
                             {{$comment->title}}
                         </p>
@@ -74,7 +82,8 @@
     @auth
         <form method="POST" action="{{ route('upload') }}">
             @csrf
-            <div id="comment_form_container" class="max-w-7xl mx-auto sm:px-6 lg:px-8 p-6 bg-white border-b border-gray-200 m-10">
+            <div id="comment_form_container"
+                 class="max-w-7xl mx-auto sm:px-6 lg:px-8 p-6 bg-white border-b border-gray-200 m-10">
                 <input type="hidden" name="profile_id" value={{ $user->id }}>
 
                 <x-label for="title" value="Title"/>

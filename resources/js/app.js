@@ -33,7 +33,7 @@ $(document).ready(function () {
     });
 });
 
-function getHtmlComment(comment) {
+function getHtmlComment(comment, repliedMessage) {
     const dateFromDB = new Date(comment['created_at']);
 
     const replyButton = (authUserId === '') ? '' : "<button class=\"reply\">Reply</button>";
@@ -46,6 +46,7 @@ function getHtmlComment(comment) {
         deleteForm +
         "<h2 hidden>" + comment['id'] + "</h2>" +
         "<h1><b>" + comment['authorName'] + "</b></h1>" +
+        repliedMessage +
         "<p>" + comment['title'] + "</p>" +
         "<p>" + comment['message'] + "</p>" +
         "<p class=\"comment_date\">" + dateFromDB.toLocaleDateString('ru-RU') + "</p>" +
@@ -64,11 +65,24 @@ function getDeleteCommentForm(comment) {
     return '';
 }
 
+function getRepliedMessage(comments, comment) {
+    if (comment['answeredCommentId'] != null) {
+        const answeredComment = comments.findIndex(c => c['id'] === comment['answeredCommentId']);
+        if (answeredComment !== -1) {
+            return comments[answeredComment]['message'];
+        }
+        return 'Message deleted';
+    }
+
+    return '';
+}
+
 function showComments(commentsJson) {
     const commentsArray = JSON.parse(commentsJson);
 
     commentsArray.forEach(comment => {
-        const htmlComment = getHtmlComment(comment);
+        const repliedMessage = getRepliedMessage(commentsArray, comment);
+        const htmlComment = getHtmlComment(comment, repliedMessage);
         $(htmlComment).insertBefore("#load_more_container");
     });
 
