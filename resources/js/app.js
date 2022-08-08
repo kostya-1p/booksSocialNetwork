@@ -36,16 +36,32 @@ $(document).ready(function () {
 function getHtmlComment(comment) {
     const dateFromDB = new Date(comment['created_at']);
 
+    const replyButton = (authUserId === '') ? '' : "<button class=\"reply\">Reply</button>";
+    const deleteForm = getDeleteCommentForm(comment);
+
     return "<div class=\"py-6\">" +
         "<div class=\"max-w-7xl mx-auto sm:px-6 lg:px-8\">" +
         "<div class=\"bg-white overflow-hidden shadow-sm sm:rounded-lg\">" +
         "<div class=\"p-6 bg-white border-b border-gray-200\">" +
+        deleteForm +
         "<h2 hidden>" + comment['id'] + "</h2>" +
         "<h1><b>" + comment['authorName'] + "</b></h1>" +
         "<p>" + comment['title'] + "</p>" +
         "<p>" + comment['message'] + "</p>" +
         "<p class=\"comment_date\">" + dateFromDB.toLocaleDateString('ru-RU') + "</p>" +
-        "<button class=\"reply\">Reply</button>";
+        replyButton;
+}
+
+function getDeleteCommentForm(comment) {
+    if (authUserId == comment['profileId'] || authUserId == comment['authorId']) {
+        return `<form method="post" action="/delete">
+                   <input type="hidden" name="id" value=${comment['id']}>
+                   <input type="hidden" name="author_id" value=${comment['authorId']}>
+                   <button class="close">X</button>
+                </form>`;
+    }
+
+    return '';
 }
 
 function showComments(commentsJson) {
