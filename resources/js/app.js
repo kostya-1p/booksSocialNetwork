@@ -63,6 +63,7 @@ function getHtmlComment(comment, repliedMessage) {
 function getDeleteCommentForm(comment) {
     if (authUserId == comment['profileId'] || authUserId == comment['authorId']) {
         return `<form method="post" action="/delete">
+                   <input type="hidden" name="_token" value=${$('input[name="_token"]').first()[0].value}>
                    <input type="hidden" name="id" value=${comment['id']}>
                    <input type="hidden" name="author_id" value=${comment['authorId']}>
                    <button class="close">X</button>
