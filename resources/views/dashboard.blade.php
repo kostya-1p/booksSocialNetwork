@@ -42,12 +42,17 @@
 
                         <h1><b> {{$authorNames[$index]}} </b></h1>
 
+
                         @if($comment->answeredCommentId != null)
                             @if(($answeredComment = $comments->keyBy('id')->get($comment->answeredCommentId)) != null)
-                                <p> {{$answeredComment->message}} </p>
+                                <div class="reply_message">
+                                    <p>{{$answeredComment->message}}</p>
+                                </div>
                             @endif
                         @elseif($comment->isReply)
-                            <p> Message Deleted </p>
+                            <div class="reply_message">
+                                <p>Message Deleted</p>
+                            </div>
                         @endif
 
                         <p>

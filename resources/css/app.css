@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-.comment_date{
+.comment_date {
     text-align: right;
 }
 
@@ -11,5 +11,12 @@
     top: -10px;
     background-color: transparent;
     border: none;
-    float:right;
+    float: right;
+}
+
+.reply_message {
+    background-color: #EBEBEB;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 20px;
 }

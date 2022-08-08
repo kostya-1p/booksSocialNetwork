@@ -38,6 +38,13 @@ function getHtmlComment(comment, repliedMessage) {
 
     const replyButton = (authUserId === '') ? '' : "<button class=\"reply\">Reply</button>";
     const deleteForm = getDeleteCommentForm(comment);
+    let repliedMessageDIV = "";
+
+    if (repliedMessage !== "") {
+        repliedMessageDIV = "<div class=\"reply_message\">" +
+            "<p>" + repliedMessage + "</p>" +
+            "</div>";
+    }
 
     return "<div class=\"py-6\">" +
         "<div class=\"max-w-7xl mx-auto sm:px-6 lg:px-8\">" +
@@ -46,7 +53,7 @@ function getHtmlComment(comment, repliedMessage) {
         deleteForm +
         "<h2 hidden>" + comment['id'] + "</h2>" +
         "<h1><b>" + comment['authorName'] + "</b></h1>" +
-        repliedMessage +
+        repliedMessageDIV +
         "<p>" + comment['title'] + "</p>" +
         "<p>" + comment['message'] + "</p>" +
         "<p class=\"comment_date\">" + dateFromDB.toLocaleDateString('ru-RU') + "</p>" +
