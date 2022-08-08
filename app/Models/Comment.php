@@ -16,7 +16,8 @@ class Comment extends Model
         'profileId',
         'authorId',
         'answeredCommentId',
-        'created_at'
+        'created_at',
+        'isReply'
     ];
 
     public function answeredComment(): \Illuminate\Database\Eloquent\Relations\BelongsTo

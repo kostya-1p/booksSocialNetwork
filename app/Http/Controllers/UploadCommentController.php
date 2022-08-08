@@ -26,6 +26,7 @@ class UploadCommentController extends Controller
         if (isset($request->answered_comment_id))
         {
             $comment->answeredCommentId = $request->answered_comment_id;
+            $comment->isReply = true;
         }
 
         $comment->save();

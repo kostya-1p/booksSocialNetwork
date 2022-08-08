@@ -44,10 +44,10 @@
 
                         @if($comment->answeredCommentId != null)
                             @if(($answeredComment = $comments->keyBy('id')->get($comment->answeredCommentId)) != null)
-                                    <p> {{$answeredComment->message}} </p>
-                            @else
-                                    <p> Сообщение удалено </p>
+                                <p> {{$answeredComment->message}} </p>
                             @endif
+                        @elseif($comment->isReply)
+                            <p> Message Deleted </p>
                         @endif
 
                         <p>
