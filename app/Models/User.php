@@ -52,4 +52,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class, 'profileId');
     }
+
+    public function books(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Book::class, 'authorId');
+    }
 }

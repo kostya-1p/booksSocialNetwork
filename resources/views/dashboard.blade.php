@@ -10,6 +10,12 @@
 
         <p> Name: {{ $user->name }} </p>
         <p> Email: {{$user->email}} </p>
+
+        @if($user->id == Auth::id())
+            <x-button class="book_list_btn">
+                <a href="">Book List</a>
+            </x-button>
+        @endif
     </x-slot>
 
     <div class="py-6">
