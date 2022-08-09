@@ -26,6 +26,9 @@ name('allUserComments')->whereNumber('id');
 Route::get('profile/{id?}', [\App\Http\Controllers\LoadProfileController::class, 'showProfile'])->
 name('dashboard')->whereNumber('id');
 
+Route::get('profile/{id}/book/all', [\App\Http\Controllers\ShowUserBooksController::class, 'showBooks'])->
+name('userBooks')->whereNumber('id');
+
 Route::post('upload', [\App\Http\Controllers\UploadCommentController::class, 'upload'])->
 name('upload');
 

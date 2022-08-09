@@ -13,7 +13,7 @@
 
         @if($user->id == Auth::id())
             <x-button class="book_list_btn">
-                <a href="">Book List</a>
+                <a href={{route('userBooks', ['id'=>$user->id])}}>Book List</a>
             </x-button>
         @endif
     </x-slot>
