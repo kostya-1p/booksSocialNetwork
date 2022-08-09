@@ -35,6 +35,12 @@ name('book')->whereNumber('user_id')->whereNumber('book_id');
 Route::get('profile/{user_id}/book/create', [\App\Http\Controllers\UploadBookController::class, 'getUploadPage'])->
 name('createBookPage')->whereNumber('user_id');
 
+Route::get('profile/{user_id}/book/{book_id}/edit', [\App\Http\Controllers\EditBookController::class, 'getEditPage'])->
+name('editBookPage')->whereNumber('user_id')->whereNumber('book_id');
+
+Route::post('book/edit', [\App\Http\Controllers\EditBookController::class, 'edit'])->
+name('editBook');
+
 Route::post('book/delete', [\App\Http\Controllers\DeleteBookController::class, 'delete'])->
 name('deleteBook');
 
