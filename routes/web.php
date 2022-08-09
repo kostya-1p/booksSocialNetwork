@@ -29,7 +29,7 @@ name('dashboard')->whereNumber('id');
 Route::get('profile/{id}/book/all', [\App\Http\Controllers\ShowUserBooksController::class, 'showBooks'])->
 name('userBooks')->whereNumber('id');
 
-Route::get('profile/{user_id}/book/{book_id}', [\App\Http\Controllers\ShowUserBooksController::class, ''])->
+Route::get('profile/{user_id}/book/{book_id}', [\App\Http\Controllers\ShowUserBooksController::class, 'showBookById'])->
 name('book')->whereNumber('user_id')->whereNumber('book_id');
 
 Route::get('profile/{user_id}/book/create', [\App\Http\Controllers\UploadBookController::class, ''])->
