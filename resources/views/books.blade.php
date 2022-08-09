@@ -11,6 +11,12 @@
                 {{$book->title}}
             </a>
         </div>
+
+        <form method="post" action="{{ route('deleteBook') }}">
+            @csrf
+            <input type="hidden" name="id" value={{$book->id}}>
+            <button class="ml-28"> Delete Book </button>
+        </form>
     @endforeach
 
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 p-6 border-b border-gray-200 ml-20">
