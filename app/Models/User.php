@@ -57,4 +57,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Book::class, 'authorId');
     }
+
+    public function accessedLibraries()
+    {
+        return $this->belongsToMany(User::class, 'user_access', 'user_id_with_access', 'library_id');
+    }
+
+    public function libraryAccesses()
+    {
+        return $this->belongsToMany(User::class, 'user_access', 'library_id', 'user_id_with_access');
+    }
 }
