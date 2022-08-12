@@ -30,7 +30,7 @@ Route::get('profile/{id}/book/all', [\App\Http\Controllers\ShowUserBooksControll
 name('userBooks')->whereNumber('id')->middleware('books');
 
 Route::get('profile/{user_id}/book/{book_id}', [\App\Http\Controllers\ShowUserBooksController::class, 'showBookById'])->
-name('book')->whereNumber('user_id')->whereNumber('book_id');
+name('book')->whereNumber('user_id')->whereNumber('book_id')->middleware('book.link');
 
 Route::get('profile/{user_id}/book/create', [\App\Http\Controllers\UploadBookController::class, 'getUploadPage'])->
 name('createBookPage')->whereNumber('user_id');

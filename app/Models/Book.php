@@ -13,7 +13,8 @@ class Book extends Model
         'id',
         'title',
         'text',
-        'authorId'
+        'authorId',
+        'isAvailable'
     ];
 
     public function bookAuthor()
