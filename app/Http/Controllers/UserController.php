@@ -3,10 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use function Symfony\Component\String\s;
+use Illuminate\Http\Request;
 
-class LoadProfileController extends Controller
+class UserController extends Controller
 {
+    public function showAllUsers()
+    {
+        $users = User::all();
+        return view('profiles')->with('users', $users);
+    }
+
     public function showProfile(int $id = 1)
     {
         $user = User::find($id);
@@ -21,13 +27,9 @@ class LoadProfileController extends Controller
     {
         $user = User::find($id);
         $comments = $user->commentsAtProfile()->get();
-
-        $skip = 0;
-        $comments = $comments->skip($skip);
-
         $authorNames = $this->getAuthorNames($comments);
 
-        $responseCommentArray = $this->getResponseArray($comments, $authorNames, $skip);
+        $responseCommentArray = $this->getResponseArray($comments, $authorNames);
         return json_encode($responseCommentArray);
     }
 
@@ -42,12 +44,12 @@ class LoadProfileController extends Controller
         return $authors;
     }
 
-    private function getResponseArray($comments, $authorNames, $authorNamesOffset): array
+    private function getResponseArray($comments, $authorNames): array
     {
         $responseArray = [];
         foreach ($comments as $index => $comment)
         {
-            $responseArray[] = $this->getItemOfResponseArray($comment, $authorNames[$index - $authorNamesOffset]);
+            $responseArray[] = $this->getItemOfResponseArray($comment, $authorNames[$index]);
         }
 
         return $responseArray;
@@ -62,7 +64,7 @@ class LoadProfileController extends Controller
             "title" => $comment->title,
             "message" => $comment->message,
             "created_at" => $comment->created_at,
-            "answeredCommentId"=>$comment->answeredCommentId,
-            "isReply"=>$comment->isReply];
+            "answeredCommentId" => $comment->answeredCommentId,
+            "isReply" => $comment->isReply];
     }
 }
