@@ -26,7 +26,7 @@ class CheckBookLinkAccess
         $accessedLibraries = User::find($id)->accessedLibraries()->where('library_id', $request->route('user_id'))->get();
 
         $isLinkAvailable = $book->isAvailable;
-        $hasAccessToLibrary = !$accessedLibraries->isEmpty() || $id == $request->route('id');
+        $hasAccessToLibrary = !$accessedLibraries->isEmpty() || $id == $request->route('user_id');
 
         if (!$isLinkAvailable && !$hasAccessToLibrary)
         {
