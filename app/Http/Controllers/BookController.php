@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
 {
@@ -78,5 +79,35 @@ class BookController extends Controller
 
         Book::destroy($request->id);
         return redirect()->back();
+    }
+
+    public function grantAccess(Request $request)
+    {
+        $this->validateRequestForChangingAccess($request);
+        $idGrantAccessTo = $request->profile_id;
+        $this->libraryAccessedUsers()->attach($idGrantAccessTo);
+        return redirect()->back();
+    }
+
+    public function disableAccess(Request $request)
+    {
+        $this->validateRequestForChangingAccess($request);
+        $idDisableAccessOf = $request->profile_id;
+        $this->libraryAccessedUsers()->detach($idDisableAccessOf);
+        return redirect()->back();
+    }
+
+    private function validateRequestForChangingAccess(Request $request)
+    {
+        $request->validate([
+            'profile_id' => ['required', 'integer']
+        ]);
+    }
+
+    private function libraryAccessedUsers()
+    {
+        $libraryId = Auth::id();
+        $user = User::find($libraryId);
+        return $user->libraryAccesses();
     }
 }

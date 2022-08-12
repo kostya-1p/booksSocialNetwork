@@ -16,6 +16,20 @@
                 <a href={{route('userBooks', ['id'=>$user->id])}}>Book List</a>
             </x-button>
         @endif
+
+        @if($user->id != Auth::id())
+            <form method="post" action="{{ (!$isLibraryAvailable) ? route('grantLibraryAccess') : route('disableLibraryAccess') }}">
+                @csrf
+                <input type="hidden" name="profile_id" value={{$user->id}}>
+                <x-button class="book_list_btn">
+                    @if(!$isLibraryAvailable)
+                        Grant Access
+                    @else
+                        Disable Access
+                    @endif
+                </x-button>
+            </form>
+        @endif
     </x-slot>
 
     <div class="py-6">

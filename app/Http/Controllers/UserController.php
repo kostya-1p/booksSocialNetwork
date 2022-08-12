@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -19,8 +20,16 @@ class UserController extends Controller
         $comments = $user->commentsAtProfile()->skip(0)->take(5)->get();
         $authorNames = $this->getAuthorNames($comments);
 
+        $libraryId = Auth::id();
+        $isAvailable = false;
+        if (isset($libraryId))
+        {
+            $accessedLibraries = $user->accessedLibraries()->where('library_id', $libraryId)->get();
+            $isAvailable = !$accessedLibraries->isEmpty();
+        }
+
         return view('dashboard')->with('user', $user)->with('comments', $comments)->
-        with('authorNames', $authorNames);
+        with('authorNames', $authorNames)->with('isLibraryAvailable', $isAvailable);
     }
 
     public function loadRestComments(int $id)

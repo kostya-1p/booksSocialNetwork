@@ -56,4 +56,10 @@ name('delete');
 Route::get('/load_comments/{id}', [\App\Http\Controllers\UserController::class, 'loadRestComments'])->
 whereNumber("id");
 
+Route::post('/book/grant_access', [\App\Http\Controllers\BookController::class, 'grantAccess'])->
+name('grantLibraryAccess');
+
+Route::post('/book/disable_access', [\App\Http\Controllers\BookController::class, 'disableAccess'])->
+name('disableLibraryAccess');
+
 require __DIR__ . '/auth.php';
