@@ -11,7 +11,7 @@
         <p> Name: {{ $user->name }} </p>
         <p> Email: {{$user->email}} </p>
 
-        @if($user->id == Auth::id())
+        @if($user->id == Auth::id() || $isLibraryAvailable)
             <x-button class="book_list_btn">
                 <a href={{route('userBooks', ['id'=>$user->id])}}>Book List</a>
             </x-button>

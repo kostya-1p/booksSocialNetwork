@@ -62,4 +62,7 @@ name('grantLibraryAccess');
 Route::post('/book/disable_access', [\App\Http\Controllers\BookController::class, 'disableAccess'])->
 name('disableLibraryAccess');
 
+Route::post('/book/toggle_sharing', [\App\Http\Controllers\BookController::class, 'toggleBookLinkSharing'])->
+name('toggleBookLinkSharing');
+
 require __DIR__ . '/auth.php';

@@ -20,11 +20,12 @@ class UserController extends Controller
         $comments = $user->commentsAtProfile()->skip(0)->take(5)->get();
         $authorNames = $this->getAuthorNames($comments);
 
-        $libraryId = Auth::id();
+        $userToAccess = Auth::id();
         $isAvailable = false;
-        if (isset($libraryId))
+
+        if (isset($userToAccess))
         {
-            $accessedLibraries = $user->accessedLibraries()->where('library_id', $libraryId)->get();
+            $accessedLibraries = $user->libraryAccesses()->where('user_id_with_access', $userToAccess)->get();
             $isAvailable = !$accessedLibraries->isEmpty();
         }
 

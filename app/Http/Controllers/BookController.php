@@ -110,4 +110,17 @@ class BookController extends Controller
         $user = User::find($libraryId);
         return $user->libraryAccesses();
     }
+
+    public function toggleBookLinkSharing(Request $request)
+    {
+        $request->validate([
+            'id' => ['required', 'integer']
+        ]);
+
+        $book = Book::find($request->id);
+        $book->isAvailable = !$book->isAvailable;
+        $book->save();
+
+        return redirect()->back();
+    }
 }
